@@ -1,0 +1,6 @@
+wutime_anti_adblock.admin:
+  title: 'AdBlock Detection Settings'
+  description: 'Configure AdBlock detection settings'
+  parent: system.admin_config_development
+  route_name: wutime_anti_adblock.adminsettings
+  weight: -100

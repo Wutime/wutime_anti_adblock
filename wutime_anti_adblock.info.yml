@@ -1,0 +1,9 @@
+name: AdBlock Detection
+type: module
+description: AdBlock Detection with optional overlay
+package: Custom
+core: 8.x
+dependencies:
+test_dependencies:
+configure: wutime_anti_adblock.settings
+php: 5.6

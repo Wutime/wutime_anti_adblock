@@ -1,0 +1,5 @@
+# In my_module.permissions.yml file.
+wutime_anti_adblock_bypass:
+  title: 'Bypass adblock detection'
+  description: 
+  restrict access: FALSE

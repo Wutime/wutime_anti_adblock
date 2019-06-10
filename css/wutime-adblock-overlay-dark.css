@@ -1,0 +1,28 @@
+/* Page background */
+#wutime-anti-adblock-overlay {
+  background-color: rgba(0,0,0, 98%);
+}
+
+#wutime-anti-adblock-overlay h2 {
+  margin-top:0;
+  padding-top:0;
+  color:white;
+}
+
+#wutime-anti-adblock-overlay .wutime-large-button {
+  color:white;
+}
+
+#wutime-anti-adblock-overlay .wutime-large-button:hover {
+  color:black;
+}
+
+/* Overlay (background) */
+.wutime-overlay-content  {
+  background: rgba(183,28,28,80%); 
+}
+
+/* Overlay inner (background) */
+#wutime-anti-adblock-overlay .wutime-adblock-message-window {
+  background-color: rgba(255,255,255,100%);
+}

@@ -1,0 +1,155 @@
+<?php
+
+use Drupal\block\Entity\Block;
+use Drupal\block_content\Entity\BlockContent;
+
+ /**
+ * Implements hook_install().
+  */
+ function wutime_anti_adblock_install() {
+  // Add Demo block.
+  $block_content = BlockContent::create([
+    'type' => 'basic',
+    'info' => 'AdBlock Detection',
+  ]);
+  $block_content->set('body', t('Sure, ad-blocking software does a great job at 
+    blocking ads, but it also blocks some useful and important features of our 
+    website. For the best possible site experience please take a moment to 
+    disable your AdBlocker.'));
+  $block_content->save();
+ 
+  $block = Block::create([
+    'id' => 'wutime_anti_adblock_block',
+    'plugin' => 'block_content:' . $block_content->uuid(),
+    'region' => 'content',
+    'provider' => 'block_content',
+    'weight' => -10000,
+    'theme' => \Drupal::config('system.theme')->get('default'),
+    'visibility' => [],
+    'settings' => [
+      'label' => 'AdBlock Detection Block',
+      'label_display' => 'visible',
+    ],
+  ]);
+  $block->save();
+
+  // Notify user of configuration location post install
+  $message = t('Customize using: ') . 
+    \Drupal::l(t('AdBlock Detection Configuration'), 
+    \Drupal\Core\Url::fromUri(
+      'internal:/admin/config/development/wutime_anti_adblock'));
+  $rendered_message = \Drupal\Core\Render\Markup::create($message);
+  drupal_set_message($rendered_message);
+  
+}
+
+ /**
+ * Implements hook_install().
+  */
+ function wutime_anti_adblock_uninstall() {
+  $block = \Drupal\block\Entity\Block::load('wutime_anti_adblock_block');
+  if ($block) {
+    $uuid = $block->getPlugin()->getDerivativeId();
+
+    $block_content = \Drupal::service('entity.repository')->loadEntityByUuid(
+      'block_content', $uuid); 
+    // delete module created block on uninstall
+    $block_content->delete();
+  }
+ }
+
+function wutime_anti_adblock_theme($existing, $type, $theme, $path) {
+  // Get module config
+  $config = \Drupal::config('wutime_anti_adblock.settings');
+  // Add overlay twig template
+  return [
+    'wutime_anti_adblock_overlay' => [
+      'variables' => getWutimeAdblockSettings(),
+    ],
+  ];
+}
+
+function wutime_anti_adblock_page_bottom(array &$page_bottom) {
+  // Get settings
+  $settings = getWutimeAdblockSettings();
+  // Exit if this user has bypass perm
+  if (!$settings['wutime_anti_adblock_ignore_perms']) {
+    if (\Drupal::currentUser()->hasPermission('wutime_anti_adblock_bypass')) {
+      return;
+    }
+  }
+  // Exit if admin pages
+  if ($settings['wutime_anti_adblock_ignore_admin_pages']) {
+    if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+      return;
+    }
+  }
+  if ($settings['wutime_anti_adblock_enable'] 
+      && !$settings['wutime_anti_adblock_overlay_disable']) {
+    $my_twig_template = ['#theme' => 'wutime_anti_adblock_overlay'];
+    $my_twig_template_rendered = \Drupal::service('renderer')->
+                                  renderPlain($my_twig_template);
+    $page_bottom['wutime_anti_adblock'] = [
+      '#markup' => $my_twig_template_rendered,
+    ];
+  }
+}
+
+// From core/modules/contextual/contextual.module.
+function wutime_anti_adblock_page_attachments(array &$attachments) {
+  // Always attached library (hides elements)
+  $attachments['#attached']['library'][] = 'wutime_anti_adblock/layout';
+  // Get module config
+  $settings = getWutimeAdblockSettings();
+  // Exit if this user has bypass perm
+  if (!$settings['wutime_anti_adblock_ignore_perms']) {
+    if (\Drupal::currentUser()->hasPermission('wutime_anti_adblock_bypass')) {
+      return;
+    }
+  }
+  // Exit if admin pages
+  if ($settings['wutime_anti_adblock_ignore_admin_pages']) {
+    if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+      return;
+    }
+  }
+  // Add assets if module is enabled
+  if ($settings['wutime_anti_adblock_enable']) {
+    // Attach libraries and config settings  
+    $attachments['#attached']['library'][] = 'wutime_anti_adblock/javascript';
+    // Add overlay theme
+    $attachments['#attached']['library'][] = 'wutime_anti_adblock/overlay_' . 
+      $settings['wutime_anti_adblock_theme'];
+    // Attach drupalSettings
+    $attachments['#attached']['drupalSettings']['wutime_anti_adblock'] = 
+      $settings;
+    $attachments['#attached']['drupalSettings']['wutime_anti_adblock']
+    ['wutime_anti_adblock_path'] = \Drupal::service('path.current')->getPath();
+  }
+
+}
+
+function getWutimeAdblockSettings() {
+
+  // Get module config
+  $config = \Drupal::config('wutime_anti_adblock.settings');
+
+  $settings = [
+    'wutime_anti_adblock_enable' 
+      => $config->get('wutime_anti_adblock_enable'),
+    'wutime_anti_adblock_allow_prompt_close' 
+      => $config->get('wutime_anti_adblock_allow_prompt_close'),
+    'wutime_anti_adblock_overlay_disable' 
+      => $config->get('wutime_anti_adblock_overlay_disable'),
+    'wutime_anti_adblock_prompt_delay_secs' 
+      => $config->get('wutime_anti_adblock_prompt_delay_secs'),
+    'wutime_anti_adblock_theme' 
+      => $config->get('wutime_anti_adblock_theme'),
+    'wutime_anti_adblock_ignore_admin_pages' 
+      => $config->get('wutime_anti_adblock_ignore_admin_pages'),
+    'wutime_anti_adblock_ignore_perms' 
+      => $config->get('wutime_anti_adblock_ignore_perms'),
+  ];
+
+  return $settings;
+}

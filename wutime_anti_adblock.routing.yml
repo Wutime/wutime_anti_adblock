@@ -1,0 +1,7 @@
+wutime_anti_adblock.adminsettings:
+  path: '/admin/config/development/wutime_anti_adblock'
+  defaults:
+    _form: '\Drupal\wutime_anti_adblock\Form\wutime_anti_adblockSettingsForm'
+    _title: 'AdBlock Detection Settings'
+  requirements:
+    _permission: 'administer site configuration'

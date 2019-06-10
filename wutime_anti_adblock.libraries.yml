@@ -1,0 +1,40 @@
+layout:
+  version: 1.x
+  header: false
+  css:
+    theme:
+      css/wutime-adblock-layout.css: {preprocess: true}
+
+overlay_default:
+  version: 1.x
+  header: false
+  css:
+    theme:
+      css/wutime-adblock-overlay-default.css: {preprocess: true}
+
+overlay_dark:
+  version: 1.x
+  header: false
+  css:
+    theme:
+      css/wutime-adblock-overlay-dark.css: {preprocess: true}
+
+overlay_light:
+  version: 1.x
+  header: false
+  css:
+    theme:
+      css/wutime-adblock-overlay-light.css: {preprocess: true}
+
+javascript:
+  version: 1.x
+  header: false
+  js:
+    js/detect.js: {preprocess: true}
+    js/ads.js: {preprocess: false}
+    js/show-notice.js: {preprocess: true}
+    js/show-overlay.js: {preprocess: true}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings

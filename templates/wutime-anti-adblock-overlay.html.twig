@@ -1,0 +1,35 @@
+<dialog id="wutime-anti-adblock-overlay">
+
+  <div class="wutime-overlay-content">
+
+    {% if wutime_anti_adblock_allow_prompt_close %}
+    <a class="wutime-close-overlay wutime-large-button" href="#">&#10006;</a>
+    {% endif %}
+    <h2>{{ 'AdBlock Detected'|t }}</h2>
+      
+
+    <div class="wutime-adblock-message-window">  
+
+      {% trans %}
+        <p><strong>We get it, advertisements are annoying!</strong></p>
+        <p>Sure, ad-blocking software does a great job at blocking ads, but it also blocks useful features of our website. For the best site experience please disable your AdBlocker.</p>
+      {% endtrans %}
+
+      <div class="wutime-prompt-close">
+        <a href="{{wutime_anti_adblock_path}}" class="button"><span class="button-text">
+          {{ 'I\'ve disabled AdBlock'|t }}
+          </span></a>
+      </div>
+
+      {% if wutime_anti_adblock_allow_prompt_close %}
+        <div class="wutime-prompt-close">
+          <a href="#" class="button--link button wutime-close-overlay">
+            <span class="button-text">
+              {{ 'No Thanks'|t }}
+            </span></a>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</dialog>

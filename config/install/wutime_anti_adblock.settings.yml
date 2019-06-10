@@ -1,0 +1,8 @@
+title: AdBlock Detection
+wutime_anti_adblock_theme: default
+wutime_anti_adblock_enable: 1
+wutime_anti_adblock_ignore_admin_pages: 1
+wutime_anti_adblock_ignore_perms: 0
+wutime_anti_adblock_allow_prompt_close: 1
+wutime_anti_adblock_overlay_disable: 0
+wutime_anti_adblock_prompt_delay_secs: 1

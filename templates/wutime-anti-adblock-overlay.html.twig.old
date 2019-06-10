@@ -1,0 +1,28 @@
+<div class="wutime-adblock wutime-adblock-full">
+  <div class="wutime-adblock-full--box">
+
+    {% if wutime_anti_adblock_allow_prompt_close %}
+    <a class="wutime-adblock-close" href="#" onClick="(function ($, drupalSettings) { Drupal.behaviors.wutime_anti_adblock_close  = {attach: function (context, settings) { $('.wutime-adblock').hide(); }};})(jQuery, drupalSettings);">&#10006;</a>
+    {% endif %}
+
+    <p class="fa-2x">wutime_adblock_phrase_detected</p>
+    <div class="adblock_message">
+      wutime_adblock_prompt_message
+      <div style="width:100%;text-align:center;margin:10px auto;">
+        <a href="javascript:location.href=location.href,return false" onClick="javascript:location.href=location.href" class="button"><span class="button-text">
+        wutime_adblock_phrase_disabled
+        </span></a>
+      </div>
+
+      {% if wutime_anti_adblock_allow_prompt_close %}
+      <div style="width:100%;text-align:center;margin:10px auto;">
+        <a href="#" onClick="$('.wutime-adblock').hide();" class="button--link button">
+        <span class="button-text">
+          wutime_adblock_phrase_nothanks
+        </span></a>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>      

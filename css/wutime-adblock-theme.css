@@ -1,0 +1,93 @@
+#block-wutime-anti-adblock-block {
+  border:1px solid red;
+  padding:1em 1em 2em 1em;
+  margin:2em 0;
+  border-radius:.2em;
+  background:#ffe;
+}
+
+.wutime-adblock {
+  &.wutime-adblock-full {
+    display: none; 
+    background: rgba(0,0,0,.9); 
+    width: 100%; 
+    height: 100%; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    .wutime-adblock-full--box {
+      border-radius:10px;
+      background: fade(rgb(183,28,28), 90%); 
+      width: 90%;
+      height: 45%; 
+      min-height:250px;
+      max-width:60em;
+      position: absolute;
+      overflow: auto;
+      margin: auto;
+      top: 0; 
+      left: 0; 
+      bottom: 0; 
+      right: 0;  
+      padding: .5em;
+      font-size: 1.067em;
+      text-align: center;
+      color: rgb(250,250,250);
+      z-index: 9999;
+    }
+  }
+  a {
+    &.wutime-adblock-close {
+      float: right;
+      font-size: 2em;
+      color: rgb(250,250,250);
+      font-weight: bold;
+      line-height: 1.067em;
+      &:hover {
+        text-decoration: none;
+        color: rgb(183,28,28);    
+      }
+    }
+  } 
+  div.adblock_message {
+    border-radius:5px;
+    max-width:55em;
+    background: rgb(244,244,244);
+    width:100%;
+    padding:0.5em;  
+    margin: 1em auto;
+    text-align:left;
+  }
+  p {
+    margin: 10px 0;
+    font-weight: 400;
+  } 
+  div.adblock_message p {
+    color: rgb(0,0,0);
+    margin: 1em 5px;
+  }
+}
+
+@media only screen and (min-width: 601px), (min-height: 601px) {
+  .wutime-adblock {
+    &.wutime-adblock-full {
+      .wutime-adblock-full--box {
+        height:320px;
+        width:600px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px), (max-height: 600px) {
+  .wutime-adblock {
+    &.wutime-adblock-full {
+      .wutime-adblock-full--box {
+        min-height:auto;
+        height:98%;
+        width:98%;
+      }
+    }
+  }
+}

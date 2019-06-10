@@ -1,0 +1,86 @@
+#block-wutime-anti-adblock-block {
+  display:none;
+}
+
+#wutime-anti-adblock-overlay {
+  display:none;
+  height: 100%;
+  width: 100%;
+  position: fixed; /* Stay in place */
+  z-index: 2147483646; /* Sit on top */
+  left: 0;
+  top: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect */
+}
+
+/* The Overlay (background) */
+#wutime-anti-adblock-overlay .wutime-overlay-content  {
+  position:absolute;
+  padding:2em;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  z-index:2147483647;
+  overflow:auto;
+  width:600px;
+  height:400px;
+  border-radius:1em;
+}
+
+#wutime-anti-adblock-overlay .wutime-adblock-message-window {
+  padding:1em;
+  border-radius:.5em;
+}
+
+#wutime-anti-adblock-overlay .wutime-large-button {
+  float: right;
+  font-size: 2em;
+  text-decoration: none;
+}
+
+#wutime-anti-adblock-overlay .wutime-large-button:hover {
+  text-decoration: none;
+}
+       
+#wutime-anti-adblock-overlay .wutime-overlay-content  p {
+  margin: .5em 0;
+  font-weight: 400;
+} 
+
+#wutime-anti-adblock-overlay .wutime-prompt-close {
+  width:100%;
+  text-align:center;
+  margin:10px auto;
+}
+
+#wutime-anti-adblock-overlay .button {
+  -moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
+  -webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
+  box-shadow:inset 0px 39px 0px -24px #e67a73;
+  background-color:#e4685d;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  border-radius:4px;
+  border:1px solid #ffffff;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  padding:6px 15px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #b23e35;
+}
+
+#wutime-anti-adblock-overlay .button:hover {
+  -moz-box-shadow:inset 0px 39px 0px -24px #b05d58;
+  -webkit-box-shadow:inset 0px 39px 0px -24px #b05d58;
+  box-shadow:inset 0px 39px 0px -24px #b05d58;
+  background-color:#ae5047;
+}
+
+#wutime-anti-adblock-overlay .button:active {
+  position:relative;
+  top:1px;
+}
